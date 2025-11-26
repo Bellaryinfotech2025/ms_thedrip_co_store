@@ -23,7 +23,7 @@ import com.thedripcostore.demo.service.ProductService;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "http://localhost:3000") // Allow requests from React
+@CrossOrigin(origins = "http://localhost:5173") // Allow requests from React
 public class ProductController {
 
     @Autowired

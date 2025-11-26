@@ -25,14 +25,14 @@ public class FileController {
     private final ProductService productService;
     private static final Logger logger = (Logger) LoggerFactory.getLogger(FileController.class);
 
-    private static final String IMAGE_BASE_PATH = "C:/drip_images/products/";
+    private static final String IMAGE_BASE_PATH = "C:/Users/Admin/Desktop/Bellary Info Tech/bellaryinfotech_invoice_files/";
 
     public FileController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/image/{filename:.+}") // allow dots in path variable
-    public ResponseEntity<?> viewImage(@PathVariable String filename) {
+    @GetMapping("/image/{filename:.+}") 
+    public ResponseEntity<?> viewImage(@PathVariable("filename") String filename) {
         try {
             String filePath = IMAGE_BASE_PATH + filename;
             Path path = Paths.get(filePath);
@@ -43,16 +43,25 @@ public class FileController {
             }
 
             byte[] imageBytes = Files.readAllBytes(path);
+
+            // Auto-detect content type
+            String contentType = Files.probeContentType(path);
+            if (contentType == null) {
+                contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+            }
+
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
+                    .contentType(MediaType.parseMediaType(contentType))
                     .contentLength(imageBytes.length)
                     .body(imageBytes);
+
         } catch (IOException e) {
             logger.error("viewImage failed for filename: " + filename, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse("Failed to read image", e.getMessage()));
         }
     }
+
 
 
     // small internal DTO for clean json error messages

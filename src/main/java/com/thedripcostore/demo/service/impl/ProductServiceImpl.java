@@ -31,7 +31,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private static final String IMAGE_BASE_PATH = "C:/drip_images/products/";
+    private static final String IMAGE_BASE_PATH = "C:/Users/Admin/Desktop/Bellary Info Tech/bellaryinfotech_invoice_files/";
     private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Autowired
