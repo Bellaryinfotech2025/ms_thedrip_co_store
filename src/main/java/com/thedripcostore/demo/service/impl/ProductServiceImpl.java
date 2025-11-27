@@ -105,9 +105,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductResponseDto updateImage(Long productId, MultipartFile image) {
+    public ProductResponseDto updateImage(String productId, MultipartFile image) {
         try {
-            ProductDetails product = repo.findById(productId)
+            ProductDetails product = repo.findByProductId(productId)
                     .orElseThrow(() -> {
                         log.warn("Product not found for id: {}", productId);
                         return new RuntimeException("Product not found");
@@ -188,4 +188,39 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("Error fetching products", e);
         }
     }
+    
+    @Override
+    @Transactional
+    public void deleteProductByProductId(String productId) {
+        try {
+            ProductDetails product = repo.findByProductId(productId)
+                    .orElseThrow(() -> {
+                        log.warn("Product not found for id: {}", productId);
+                        return new RuntimeException("Product not found");
+                    });
+
+            // Delete image from disk if exists
+            if (product.getImagePath() != null) {
+                File imageFile = new File(product.getImagePath());
+                if (imageFile.exists()) {
+                    if (imageFile.delete()) {
+                        log.info("Deleted image file for productId: {}", productId);
+                    } else {
+                        log.warn("Failed to delete image file for productId: {}", productId);
+                    }
+                }
+            }
+
+            repo.delete(product);
+            log.info("Product deleted successfully for productId: {}", productId);
+
+        } catch (RuntimeException e) {
+            log.error("Error deleting product with productId: {}", productId, e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error while deleting product with productId: {}", productId, e);
+            throw new RuntimeException("Failed to delete product with id: " + productId, e);
+        }
+    }
+
 }

@@ -13,10 +13,13 @@ public interface ProductService {
     ProductResponseDto addProduct(ProductRequestDto dto, MultipartFile image);
 
     // update only the image
-    ProductResponseDto updateImage(Long productId, MultipartFile image);
+    ProductResponseDto updateImage(String productId, MultipartFile image);
   
     // get all products
     List<ProductResponseDto> getAllProducts();
 
 	byte[] getImageByProductId(String productId);
+	
+    void deleteProductByProductId(String productId);
+
 }
