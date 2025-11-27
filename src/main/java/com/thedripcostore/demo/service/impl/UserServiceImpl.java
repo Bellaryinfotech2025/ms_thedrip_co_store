@@ -12,6 +12,7 @@ import com.thedripcostore.demo.repository.UserRepository;
 import com.thedripcostore.demo.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -85,6 +86,30 @@ public class UserServiceImpl implements UserService {
      } catch (Exception e) {
          logger.error("Error fetching user: {}", e.getMessage(), e);
          throw new RuntimeException("Failed to fetch user", e);
+     }
+ }
+ 
+ 
+ @Override
+ public List<UserDto> getAllUsers() {
+     try {
+         logger.info("Fetching all users");
+         List<UserEntity> entities = userRepository.findAll();
+         
+         return entities.stream().map(entity -> {
+             UserDto dto = new UserDto();
+             dto.setId(entity.getId());
+             dto.setName(entity.getName());
+             dto.setPhoneNumber(entity.getPhoneNumber());
+             dto.setUserId(entity.getUserId());
+             dto.setRegisteredDateTime(entity.getRegisteredDateTime());
+             dto.setStatus(entity.getStatus());
+             return dto;
+         }).toList();
+         
+     } catch (Exception e) {
+         logger.error("Error fetching all users: {}", e.getMessage(), e);
+         throw new RuntimeException("Failed to fetch users", e);
      }
  }
 }

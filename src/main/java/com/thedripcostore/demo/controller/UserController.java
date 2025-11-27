@@ -3,6 +3,9 @@ package com.thedripcostore.demo.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.thedripcostore.demo.dto.UserDto;
+import com.thedripcostore.demo.entity.UserEntity;
+import com.thedripcostore.demo.repository.UserRepository;
 import com.thedripcostore.demo.service.UserService;
 
 @RestController
@@ -21,6 +26,9 @@ public class UserController {
 
  @Autowired
  private UserService userService;
+@Autowired 
+private UserRepository userRepository;
+
 
  @PostMapping("/users")
  public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto, HttpServletResponse response) {
@@ -57,4 +65,20 @@ public class UserController {
          return ResponseEntity.notFound().build();
      }
  }
+ 
+ 
+ 
+ 
+ @GetMapping("/users")
+ public ResponseEntity<List<UserDto>> getAllUsers() {
+     try {
+         logger.info("Received GET request for all users");
+         List<UserDto> users = userService.getAllUsers();
+         return ResponseEntity.ok(users);
+     } catch (Exception e) {
+         logger.error("Error fetching all users: {}", e.getMessage(), e);
+         return ResponseEntity.internalServerError().build();
+     }
+ }
+
 }
