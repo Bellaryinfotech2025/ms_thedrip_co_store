@@ -19,7 +19,7 @@ import com.thedripcostore.demo.service.UserService;
 
 @RestController
 @RequestMapping("/api/v2")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
