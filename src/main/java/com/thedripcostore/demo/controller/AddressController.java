@@ -15,7 +15,7 @@ import java.util.List;
 public class AddressController {
 
     private static final Logger log = LoggerFactory.getLogger(AddressController.class);
-
+ 
     private final AddressService addressService;
 
     public AddressController(AddressService addressService) {
@@ -35,7 +35,7 @@ public class AddressController {
     }
 
     @GetMapping("/getAddressByUserId/{userId}")
-    public ResponseEntity<List<UserAddress>> getByUser(@PathVariable String userId) {
+    public ResponseEntity<List<UserAddress>> getByUser(@PathVariable("userId") String userId) {
         try {
             List<UserAddress> addresses = addressService.getAddressesByUserId(userId);
             log.info("Fetched {} addresses for userId: {}", addresses.size(), userId);

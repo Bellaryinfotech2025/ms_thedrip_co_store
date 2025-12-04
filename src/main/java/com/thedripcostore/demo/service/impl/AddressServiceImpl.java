@@ -46,6 +46,10 @@ public class AddressServiceImpl implements AddressService {
             addr.setState(dto.getState());
             addr.setCountry(dto.getCountry());
             addr.setPincode(dto.getPincode());
+            addr.setFirstName(dto.getFirstName());
+            addr.setLastName(dto.getLastName());
+            addr.setEmail(dto.getEmail());
+            addr.setPhone(dto.getPhone());
             addr.setIsDefault(dto.getIsDefault() != null ? dto.getIsDefault() : false);
 
             // Unset other defaults if this is default
@@ -98,6 +102,10 @@ public class AddressServiceImpl implements AddressService {
             addr.setState(dto.getState());
             addr.setCountry(dto.getCountry());
             addr.setPincode(dto.getPincode());
+            addr.setFirstName(dto.getFirstName());
+            addr.setLastName(dto.getLastName());
+            addr.setEmail(dto.getEmail());
+            addr.setPhone(dto.getPhone());
 
             if (dto.getIsDefault() != null && dto.getIsDefault()) {
                 List<UserAddress> existing = addressRepo.findByUserUserId(addr.getUser().getUserId());

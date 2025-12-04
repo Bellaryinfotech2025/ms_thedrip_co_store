@@ -1,5 +1,5 @@
+// com.thedripcostore.demo.entity.UserAddress
 package com.thedripcostore.demo.entity;
-
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -16,11 +16,24 @@ public class UserAddress {
     @Column(name = "address_id", unique = true, nullable = false, length = 40)
     private String addressId = "ADDR-" + UUID.randomUUID().toString().substring(0, 8);
 
-    // join to users.user_id (non-PK reference)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     private UserEntity user;
 
+    // NEW FIELDS
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String phone;
+
+    // Existing fields
     @Column(name = "house_no")
     private String houseNo;
 
@@ -40,109 +53,55 @@ public class UserAddress {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-	public Long getId() {
-		return id;
-	}
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getAddressId() { return addressId; }
+    public void setAddressId(String addressId) { this.addressId = addressId; }
 
-	public String getAddressId() {
-		return addressId;
-	}
+    public UserEntity getUser() { return user; }
+    public void setUser(UserEntity user) { this.user = user; }
 
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
-	}
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-	public UserEntity getUser() {
-		return user;
-	}
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-	public String getHouseNo() {
-		return houseNo;
-	}
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-	public void setHouseNo(String houseNo) {
-		this.houseNo = houseNo;
-	}
+    public String getHouseNo() { return houseNo; }
+    public void setHouseNo(String houseNo) { this.houseNo = houseNo; }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getStreet() { return street; }
+    public void setStreet(String street) { this.street = street; }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public String getLocality() { return locality; }
+    public void setLocality(String locality) { this.locality = locality; }
 
-	public String getLocality() {
-		return locality;
-	}
+    public String getCity() { return city; }
+    public void setCity(String city) { this.city = city; }
 
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
 
-	public String getCity() {
-		return city;
-	}
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getPincode() { return pincode; }
+    public void setPincode(String pincode) { this.pincode = pincode; }
 
-	public String getState() {
-		return state;
-	}
+    public Boolean getIsDefault() { return isDefault; }
+    public void setIsDefault(Boolean isDefault) { this.isDefault = isDefault; }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getPincode() {
-		return pincode;
-	}
-
-	public void setPincode(String pincode) {
-		this.pincode = pincode;
-	}
-
-	public Boolean getIsDefault() {
-		return isDefault;
-	}
-
-	public void setIsDefault(Boolean isDefault) {
-		this.isDefault = isDefault;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-   
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
