@@ -25,7 +25,7 @@ public class FileController {
     private final ProductService productService;
     private static final Logger logger = (Logger) LoggerFactory.getLogger(FileController.class);
 
-    private static final String IMAGE_BASE_PATH = "C:/Users/Admin/Desktop/Bellary Info Tech/bellaryinfotech_invoice_files/";
+    private static final String IMAGE_BASE_PATH = "Home/ubuntu";
 
     public FileController(ProductService productService) {
         this.productService = productService;
