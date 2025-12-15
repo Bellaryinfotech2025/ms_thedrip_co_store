@@ -17,4 +17,4 @@ COPY --from=build /app/target/thedripcostoreproject-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 4646
 
 # wait for mysql:3306 before starting the app
-ENTRYPOINT ["sh", "-c", "until nc -z mysql 3306; do echo 'Waiting for MySQL...'; sleep 3; done && java -jar app.jar --server.address=0.0.0.0 --server.port=4646"]
+ENTRYPOINT ["java","-jar","app.jar","--server.address=0.0.0.0","--server.port=4646"]
