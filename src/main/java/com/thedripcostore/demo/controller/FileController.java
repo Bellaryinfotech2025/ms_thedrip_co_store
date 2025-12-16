@@ -25,7 +25,7 @@ public class FileController {
     private final ProductService productService;
     private static final Logger logger = (Logger) LoggerFactory.getLogger(FileController.class);
 
-    private static final String IMAGE_BASE_PATH = "Home/ubuntu";
+    private static final String IMAGE_BASE_PATH = "/home/ubuntu/dripco_admin_panel";
 
     public FileController(ProductService productService) {
         this.productService = productService;
